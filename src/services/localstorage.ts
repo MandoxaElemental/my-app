@@ -8,6 +8,7 @@ function saveToLocalStorage(country: string) {
             localStorage.setItem('Country', JSON.stringify(countryArr));
         }
 
+
 }
 function saveToRecentStorage(country: string) {
 
@@ -33,6 +34,7 @@ function getRecentStorage(){
     }
     return JSON.parse(localStorageData);
     }
+    return []
     
 }
 
@@ -46,7 +48,7 @@ function getLocalStorage(){
             return JSON.parse(localStorageData);      
           }
  
-    
+    return []
 }
 
 function removeFromLocalStorage(country: string){
