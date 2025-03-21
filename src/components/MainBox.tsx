@@ -177,7 +177,8 @@ const MainBox = () => {
 
     }
 
-    const SearchCountry = () => {
+    const SearchCountry = (name: string) => {
+        setSearch(name)
         myWeather()
         Icons()
     }
@@ -228,7 +229,7 @@ const MainBox = () => {
             getRecentStorage().map((names: string) => {
                 return(
                     <div className='flex justify-between'>
-                    <p onClick={() => setSearch(names)}>{names}</p>
+                    <p onClick={() => SearchCountry(names)}>{names}</p>
                     <img onClick={() => removeFromLocalStorage(names)} src="/assets/star-fill.svg" alt="star" />
                     </div>
                 )
@@ -240,7 +241,7 @@ const MainBox = () => {
             getLocalStorage().map((names: string) => {
                 return(
                     <div className='flex justify-between'>
-                    <p onClick={() => setSearch(names)}>{names}</p>
+                    <p onClick={() => SearchCountry(names)}>{names}</p>
                     <img onClick={() => removeFromLocalStorage(names)} src="/assets/star-fill.svg" alt="star" />
                     </div>
                 )
