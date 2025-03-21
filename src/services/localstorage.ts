@@ -1,17 +1,31 @@
 function saveToLocalStorage(country: string) {
-    const countryArr = getLocalStorage();
-    if (!countryArr.includes(country)) {
-        countryArr.push(country);
+    try {
+        if (typeof window !== 'undefined') {
+            const countryArr = getLocalStorage();
+            if (!countryArr.includes(country)) {
+                countryArr.push(country);
+            }
+            localStorage.setItem('Country', JSON.stringify(countryArr));
+        }
+    } catch (error) {
+        console.error('Error while setting token in localStorage:', error);
     }
-    localStorage.setItem('Country', JSON.stringify(countryArr));
+   
 
 }
 function saveToRecentStorage(country: string) {
-    const recentArr = getLocalStorage();
-    if (!recentArr.includes(country)) {
-        recentArr.push(country);
+    try {
+        if (typeof window !== 'undefined') {
+
+            const recentArr = getLocalStorage();
+            if (!recentArr.includes(country)) {
+                recentArr.push(country);
+            }
+            localStorage.setItem('Recent', JSON.stringify(recentArr));        }
+    } catch (error) {
+        console.error('Error while setting token in localStorage:', error);
     }
-    localStorage.setItem('Recent', JSON.stringify(recentArr));
+
 
 }
 
@@ -24,18 +38,32 @@ function getRecentStorage(){
 }
 
 function getLocalStorage(){
-    const localStorageData = localStorage.getItem('Country');
-    if (localStorageData == null) {
-        return [];
+
+    try {
+        if (typeof window !== 'undefined') {
+            const localStorageData = localStorage.getItem('Country');
+            if (localStorageData == null) {
+                return [];
+            }
+            return JSON.parse(localStorageData);        }
+    } catch (error) {
+        console.error('Error while setting token in localStorage:', error);
     }
-    return JSON.parse(localStorageData);
+    
 }
 
 function removeFromLocalStorage(country: string){
-    const countryArr = getLocalStorage();
-    const countryindex = countryArr.indexOf(country);
-    countryArr.splice(countryindex, 1);
-    localStorage.setItem('Country', JSON.stringify(countryArr));
+    try {
+        if (typeof window !== 'undefined') {
+            const countryArr = getLocalStorage();
+            const countryindex = countryArr.indexOf(country);
+            countryArr.splice(countryindex, 1);
+            localStorage.setItem('Country', JSON.stringify(countryArr));        }
+    } catch (error) {
+        console.error('Error while setting token in localStorage:', error);
+    }
+
+    
 }
 
 export{saveToLocalStorage, getLocalStorage, removeFromLocalStorage, saveToRecentStorage, getRecentStorage }
