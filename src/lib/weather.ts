@@ -1,4 +1,7 @@
-import { APIKEY } from "@/services/environtments";
+
+const APIKEY = process.env.NEXT_PUBLIC_API_KEY
+
+console.log(APIKEY)
 
 //https://api.openweathermap.org/data/2.5/forecast?q=stockton&appid=bc9fbb7eaadc368de3ca8a6e14057080
 

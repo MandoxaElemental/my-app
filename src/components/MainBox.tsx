@@ -34,10 +34,6 @@ const MainBox = () => {
     const [icon4, setIcon4] = useState('')
     const [icon5, setIcon5] = useState('')
     const [saved, setSaved] = useState('')
-    const [local, setLocal] = useState('')
-    const [recent, setRecent] = useState([])
-
-    const recentArr: string[] = [];
 
     function Icons(){
         function Icon1Func(){
@@ -176,17 +172,21 @@ const MainBox = () => {
 
     }
 
-    const SearchCountry = async (name: string) => {
+    const SearchCountry = (name: string) => {
         console.log(name)
         setSearch(name)
+        console.log(search)
         myWeather()
-        Icons()
     }
-    
+
     useEffect(() => {
         myWeather()
+    }, [])
+    
+    useEffect(() => {
         checkTimeAndAct()
     }, [])
+    
 
     useEffect(() => {
         Icons()
@@ -237,7 +237,6 @@ const MainBox = () => {
                 return(
                     <div className='flex justify-between'>
                     <p className='text-xl font-bold' onClick={() => SearchCountry(names)}>{names}</p>
-                    <img onClick={() => removeFromLocalStorage(names)} src="/assets/star-fill.svg" alt="star" />
                     </div>
                 )
             })
