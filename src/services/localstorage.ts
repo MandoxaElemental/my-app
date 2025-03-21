@@ -7,7 +7,6 @@ function saveToLocalStorage(country: string) {
             }
             localStorage.setItem('Country', JSON.stringify(countryArr));
         }
-   
 
 }
 function saveToRecentStorage(country: string) {
@@ -26,7 +25,7 @@ function saveToRecentStorage(country: string) {
 }
 
 function getRecentStorage(){
-    if(typeof window != null)
+    if(typeof window != 'undefined')
     {
         const localStorageData = localStorage.getItem('Recent');
     if (localStorageData == null) {
@@ -58,7 +57,6 @@ function removeFromLocalStorage(country: string){
             countryArr.splice(countryindex, 1);
             localStorage.setItem('Country', JSON.stringify(countryArr));     
            }
-
     
 }
 
