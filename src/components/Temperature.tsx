@@ -4,7 +4,7 @@ import { saveToLocalStorage, getLocalStorage, removeFromLocalStorage } from '@/s
 
 const Temperature = ({city, initials, saved, currentTemp, image, status, min, max} : {city: string, initials: string, saved: string, currentTemp: string, image: string, status: string, min: string, max: string}) => {
   const Save = () => {
-        let list = getLocalStorage()
+        const list = getLocalStorage()
         console.log(list)
         if (!list.includes(city)) {
           saveToLocalStorage(city)

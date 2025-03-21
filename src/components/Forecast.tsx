@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 const Forecast = ({icon1, icon2, icon3, icon4, icon5, temp1, temp2, temp3, temp4, temp5} : {icon1: string, icon2: string, icon3: string, icon4: string, icon5: string, temp1: string, temp2: string, temp3: string, temp4: string, temp5: string} ) => {
   
     const now = new Date();
-    let daysOfWeek = [
+    const daysOfWeek = [
         'Sun',
         'Mon',
         'Tue',
@@ -13,7 +13,6 @@ const Forecast = ({icon1, icon2, icon3, icon4, icon5, temp1, temp2, temp3, temp4
         'Sat'
     ]
     const dayOfWeek = daysOfWeek[now.getDay()];
-    const time = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
 
         const [day1, setDay1] = useState('')
         const [day2, setDay2] = useState('')

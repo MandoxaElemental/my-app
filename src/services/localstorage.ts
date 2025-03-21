@@ -1,5 +1,5 @@
 function saveToLocalStorage(country: string) {
-    let countryArr = getLocalStorage();
+    const countryArr = getLocalStorage();
     if (!countryArr.includes(country)) {
         countryArr.push(country);
     }
@@ -7,7 +7,7 @@ function saveToLocalStorage(country: string) {
 
 }
 function saveToRecentStorage(country: string) {
-    let recentArr = getLocalStorage();
+    const recentArr = getLocalStorage();
     if (!recentArr.includes(country)) {
         recentArr.push(country);
     }
@@ -16,7 +16,7 @@ function saveToRecentStorage(country: string) {
 }
 
 function getRecentStorage(){
-    let localStorageData = localStorage.getItem('Recent');
+    const localStorageData = localStorage.getItem('Recent');
     if (localStorageData == null) {
         return [];
     }
@@ -24,7 +24,7 @@ function getRecentStorage(){
 }
 
 function getLocalStorage(){
-    let localStorageData = localStorage.getItem('Country');
+    const localStorageData = localStorage.getItem('Country');
     if (localStorageData == null) {
         return [];
     }
@@ -32,8 +32,8 @@ function getLocalStorage(){
 }
 
 function removeFromLocalStorage(country: string){
-    let countryArr = getLocalStorage();
-    let countryindex = countryArr.indexOf(country);
+    const countryArr = getLocalStorage();
+    const countryindex = countryArr.indexOf(country);
     countryArr.splice(countryindex, 1);
     localStorage.setItem('Country', JSON.stringify(countryArr));
 }

@@ -8,7 +8,7 @@ import Temperature from './Temperature'
 import Forecast from './Forecast'
 import Recent from './Recent'
 import { getWeather } from '@/lib/weather'
-import { saveToLocalStorage, getLocalStorage, removeFromLocalStorage, saveToRecentStorage, getRecentStorage } from '@/services/localstorage'
+import { getLocalStorage, removeFromLocalStorage, saveToRecentStorage, getRecentStorage } from '@/services/localstorage'
 import SavedBox from './SavedBox'
 
 const MainBox = () => {
@@ -195,7 +195,7 @@ const MainBox = () => {
     }, [status, status2, status3, status4, status5, saved])
 
     const Star = () => {
-        let list = getLocalStorage()
+        const list = getLocalStorage()
         if (!list.includes(city)) {
             setSaved("/assets/star.svg")
         } else {
@@ -233,9 +233,9 @@ const MainBox = () => {
     </div>
     <div className="md:col-start-2 md:row-start-2">
         <MainCard title='Recent Searches' weatherComponent={<Recent recent={
-            getRecentStorage().map((names: string) => {
+            getRecentStorage().map((names: string, idx: number) => {
                 return(
-                    <div className='flex justify-between'>
+                    <div key={idx} className='flex justify-between'>
                     <p className='text-xl font-bold' onClick={() => SearchCountry(names)}>{names}</p>
                     </div>
                 )
@@ -244,9 +244,9 @@ const MainBox = () => {
     </div>
     <div className="md:col-start-3 md:row-start-2">
         <MainCard title='Saved' weatherComponent={<SavedBox saved={
-            getLocalStorage().map((names: string) => {
+            getLocalStorage().map((names: string, idx: number) => {
                 return(
-                    <div className='flex justify-between'>
+                    <div key={idx} className='flex justify-between'>
                     <p className='text-xl font-bold' onClick={() => SearchCountry(names)}>{names}</p>
                     <img onClick={() => removeFromLocalStorage(names)} src="/assets/star-fill.svg" alt="star" />
                     </div>
