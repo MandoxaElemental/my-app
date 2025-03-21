@@ -195,11 +195,14 @@ const MainBox = () => {
     }, [status, status2, status3, status4, status5, saved])
 
     const Star = () => {
-        const list = getLocalStorage()
-        if (!list.includes(city)) {
-            setSaved("/assets/star.svg")
-        } else {
-            setSaved("/assets/star-fill.svg")
+        if(getLocalStorage() != undefined) {
+            const list = getLocalStorage()
+            if (!list.includes(city)) {
+                setSaved("/assets/star.svg")
+            } else {
+                setSaved("/assets/star-fill.svg")
+            }
+
         }
     }
 

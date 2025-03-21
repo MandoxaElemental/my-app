@@ -4,6 +4,8 @@ import { saveToLocalStorage, getLocalStorage, removeFromLocalStorage } from '@/s
 
 const Temperature = ({city, initials, saved, currentTemp, image, status, min, max} : {city: string, initials: string, saved: string, currentTemp: string, image: string, status: string, min: string, max: string}) => {
   const Save = () => {
+    if(getLocalStorage() != undefined){
+    
         const list = getLocalStorage()
         console.log(list)
         if (!list.includes(city)) {
@@ -11,6 +13,8 @@ const Temperature = ({city, initials, saved, currentTemp, image, status, min, ma
       } else {
         removeFromLocalStorage(city)
       }
+    }
+
   }
   return (
     <div className='text-center'>

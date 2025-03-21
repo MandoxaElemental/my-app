@@ -1,4 +1,3 @@
-'use client'
 function saveToLocalStorage(country: string) {
     const countryArr = getLocalStorage();
     if (!countryArr.includes(country)) {
