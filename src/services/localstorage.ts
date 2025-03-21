@@ -7,14 +7,11 @@ function saveToLocalStorage(country: string) {
 
 }
 function saveToRecentStorage(country: string) {
-    let countryArr = getLocalStorage();
-    if (!countryArr.includes(country)) {
-        countryArr.push(country);
+    let recentArr = getLocalStorage();
+    if (!recentArr.includes(country)) {
+        recentArr.push(country);
     }
-    if(countryArr.length > 5){
-        countryArr.shift();
-    }
-    localStorage.setItem('Recent', JSON.stringify(countryArr));
+    localStorage.setItem('Recent', JSON.stringify(recentArr));
 
 }
 

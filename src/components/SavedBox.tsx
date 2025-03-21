@@ -1,9 +1,9 @@
 import React from 'react'
 
 const 
-SavedBox = ({saved} : {saved: string}) => {
+SavedBox = ({saved} : {saved: React.ReactNode}) => {
   return (
-    <div className='px-5 text-xl overflow-scroll'>
+    <div className='px-5 text-xl overflow-scroll max-h-[130px]'>
         {saved}
     </div>
   )

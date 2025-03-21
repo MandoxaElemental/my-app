@@ -14,7 +14,7 @@ const Temperature = ({city, initials, saved, currentTemp, image, status, min, ma
   }
   return (
     <div className='text-center'>
-      <div className='flex justify-center items-center'>
+      <div className='flex justify-center items-center px-4 pb-3'>
         <p className='text-3xl font-bold'>{city}, {initials}</p>
         <img onClick={Save} className='h-[25px] w-[25px] ml-2' src={saved} alt="star" />
       </div>

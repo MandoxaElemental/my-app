@@ -168,7 +168,6 @@ const MainBox = () => {
         setTemp5(Math.round((weather.list[4].main.temp * 9/5) - 459.67) + "°F")
         RecentSearches()
         Star()
-        MyLocal()
 
     }
 
@@ -177,7 +176,8 @@ const MainBox = () => {
 
     }
 
-    const SearchCountry = (name: string) => {
+    const SearchCountry = async (name: string) => {
+        console.log(name)
         setSearch(name)
         myWeather()
         Icons()
@@ -185,11 +185,13 @@ const MainBox = () => {
     
     useEffect(() => {
         myWeather()
+        checkTimeAndAct()
     }, [])
 
     useEffect(() => {
         Icons()
         Star()
+        getRecentStorage()
     }, [status, status2, status3, status4, status5, saved])
 
     const Star = () => {
@@ -201,52 +203,57 @@ const MainBox = () => {
         }
     }
 
-    const MyLocal = () => {
-        getLocalStorage().map((names: string) => {
-            console.log(names)
-            return(
-                <p onClick={() => setSearch(names)}>{names}</p>
-            )
-        });
-    };
+    function checkTimeAndAct() {
+        const currentHour = new Date().getHours();
+    
+        if (6 <= currentHour && currentHour < 12) {
+            console.log("Good morning!");
+        } else if (12 <= currentHour && currentHour < 18) {
+            console.log("Good afternoon!");
+        } else if (18 <= currentHour && currentHour < 24) {
+            console.log("Good evening!");
+        } else {
+            console.log("Good night!");
+        }
+    }
     
 
   return (
-    <div className='bg-[#70707082] w-[900px] h-auto rounded-xl p-5'>
+    <div className='bg-[#70707082] w-auto h-auto rounded-xl p-5'>
         <div className='flex mx-10'>
         <Input onChange={ (event) => setSearch(event.target.value)} className='bg-white mx-5' placeholder='Enter Country'/>
-        <Button onClick={SearchCountry} className='bg-[#1B7E94]'>Search</Button>
+        <Button onClick={() => SearchCountry(search)} className='bg-[#1B7E94]'>Search</Button>
         </div>
-    <div className="min-h-[100%] grid grid-cols-3 grid-rows-2 gap-4 p-5">
-    <div className="row-span-2">
+    <div className="min-h-[100%] grid grid-cols-1 grid-rows-1 md:grid-cols-3 md:grid-rows-2 gap-4 p-5">
+    <div className="md:row-span-2">
         <MainCard title='Temperature' weatherComponent={<Temperature city={city} initials={initials} saved={saved} currentTemp={temp} image={image} status={status} max={max} min={min}/>}/>
     </div>
-    <div className="col-span-2">
+    <div className="md:col-span-2">
         <MainCard title='5-Day Forecast' weatherComponent={<Forecast icon1={icon1} icon2={icon2} icon3={icon3} icon4={icon4} icon5={icon5} temp1={temp} temp2={temp2} temp3={temp3} temp4={temp4} temp5={temp5}/>}/>
     </div>
-    <div className="col-start-2 row-start-2">
-        <MainCard title='Recent Searches' weatherComponent={
+    <div className="md:col-start-2 md:row-start-2">
+        <MainCard title='Recent Searches' weatherComponent={<Recent recent={
             getRecentStorage().map((names: string) => {
                 return(
                     <div className='flex justify-between'>
-                    <p onClick={() => SearchCountry(names)}>{names}</p>
+                    <p className='text-xl font-bold' onClick={() => SearchCountry(names)}>{names}</p>
                     <img onClick={() => removeFromLocalStorage(names)} src="/assets/star-fill.svg" alt="star" />
                     </div>
                 )
             })
-        }/>
+        }/>}/>
     </div>
-    <div className="col-start-3 row-start-2">
-        <MainCard title='Saved' weatherComponent={
+    <div className="md:col-start-3 md:row-start-2">
+        <MainCard title='Saved' weatherComponent={<SavedBox saved={
             getLocalStorage().map((names: string) => {
                 return(
                     <div className='flex justify-between'>
-                    <p onClick={() => SearchCountry(names)}>{names}</p>
+                    <p className='text-xl font-bold' onClick={() => SearchCountry(names)}>{names}</p>
                     <img onClick={() => removeFromLocalStorage(names)} src="/assets/star-fill.svg" alt="star" />
                     </div>
                 )
             })
-        }/>
+        }/>}/>
     </div>
 </div>
     
